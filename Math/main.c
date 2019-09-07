@@ -36,9 +36,7 @@ void faulhaber(int p) {
         sign = -1 * sign;
         Frac coeff = multFrac(
                               multFrac(
-                                       multFrac(
-                                                makeFrac(1, p + 1),
-                                                makeFrac(sign, 1)),
+                                       multFrac(makeFrac(1, p + 1), makeFrac(sign, 1)),
                                        makeFrac(binomial(p + 1, j), 1)),
                               bernoulli(j));
         if (equalFrac(coeff, makeFrac(0, 1))) continue;
