@@ -1,0 +1,12 @@
+# depslib dependency file v1.0
+1567867479 source:c:\users\samsung\desktop\ps\math\main.c
+	"Frac.h"
+
+1567867480 source:c:\users\samsung\desktop\ps\math\frac.c
+	"Frac.h"
+
+1567867533 c:\users\samsung\desktop\ps\math\frac.h
+	<stdbool.h>
+	<stdio.h>
+	<stdlib.h>
+
