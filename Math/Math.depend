@@ -10,3 +10,14 @@
 	<stdio.h>
 	<stdlib.h>
 
+1567867480 source:d:\github\sshs1313\math\frac.c
+	"Frac.h"
+
+1567867533 d:\github\sshs1313\math\frac.h
+	<stdbool.h>
+	<stdio.h>
+	<stdlib.h>
+
+1567868473 source:d:\github\sshs1313\math\main.c
+	"Frac.h"
+
