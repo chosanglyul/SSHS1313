@@ -16,7 +16,7 @@ class Query {
   String makeUrl();
 
   public:
-  Query(const String&, const String&, const int);
+  Query(const String&, const int, const String&);
   void sendQuery(const char* const, const char* const);
   void pushData(const userinfo);
 };

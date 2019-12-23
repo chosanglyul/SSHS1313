@@ -1,5 +1,4 @@
 #include <ESP8266WiFi.h>
-#include <thread>
 #include "WiFiextension.h"
 #include "Query.h"
 
@@ -10,7 +9,7 @@ const String host = "10.56.219.241";
 const int port = 4000;
 const String path = "/gun";
 userinfo user = {2, 100, 0, 0, 0};
-Query queryManager(path, host, port);
+Query queryManager(host, port, path);
 
 void setup() {
   Serial.begin(115200);

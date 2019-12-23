@@ -2,7 +2,7 @@
 #include <ESP8266HTTPClient.h>
 #include "Query.h"
 
-Query::Query(const String& path, const String& host, const int port) : mPath(path), mHost(host), mPort(port) {}
+Query::Query(const String& host, const int port, const String& path) : mHost(host), mPort(port), mPath(path) {}
 
 String Query::makeUrl() {
   String Url = mPath;
