@@ -14,12 +14,12 @@ Query queryManager(path, host, port);
 
 void setup() {
   Serial.begin(115200);
-  //printWiFis();
+  printWiFis();
 }
 
 void loop() {
   if(WiFi.status() != WL_CONNECTED)
-    connectWpa2(ssid, username, password);
+      connectWpa2(ssid, username, password);
   queryManager.pushData(user);
   queryManager.sendQuery(username, password);
   delay(2000);
