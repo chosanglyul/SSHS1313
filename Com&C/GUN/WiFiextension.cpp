@@ -1,25 +1,39 @@
 #include <ESP8266WiFi.h>
-
+#include "WiFiextension.h"
 extern "C" {
 #include "user_interface.h"
 #include "wpa2_enterprise.h"
 }
 
-// SSID to connect to
-char ssid[] = "SSHS-WiFi";
-char wlpasswd[] = "sshs1sshs!";
-char username[] = "comnc";
-char password[] = "sshs1sshs!";
+void printWiFis(void) {
+  int n = WiFi.scanNetworks();
+  Serial.println("Scan complete!");
+  if (n == 0) {
+    Serial.println("No networks available.");
+  } else {
+    Serial.print(n);
+    Serial.println(" networks discovered.");
+    for (int i = 0; i < n; i++) {
+      Serial.print(i + 1);
+      Serial.print(": ");
+      Serial.print(WiFi.SSID(i));
+      Serial.print(" (");
+      Serial.print(WiFi.RSSI(i));
+      Serial.print(")");
+      Serial.println((WiFi.encryptionType(i) == ENC_TYPE_NONE) ? " " : "*");
+      Serial.println(WiFi.BSSIDstr(i));
+      delay(10);
+    }
+  }
+}
 
-void setup() {
-  Serial.begin(115200);
+void connectWpa2(const char* const ssid, const char* const username, const char* const password) {
   // Setting ESP into STATION mode only (no AP mode or dual mode)
-  wifi_set_opmode(0x01);
-  
+  wifi_set_opmode(STATION_MODE);
+  WiFi.mode(WIFI_STA);
   struct station_config wifi_config;
   memset(&wifi_config, 0, sizeof(wifi_config));
   strcpy((char*)wifi_config.ssid, ssid);
-  strcpy((char*)wifi_config.password, wlpasswd);
   wifi_station_set_config(&wifi_config);
   wifi_station_set_wpa2_enterprise_auth(1);
   // Clean up to be sure no old data is still inside
@@ -29,6 +43,7 @@ void setup() {
   wifi_station_clear_enterprise_username();
   wifi_station_clear_enterprise_password();
   wifi_station_clear_enterprise_new_password();
+  wifi_station_set_enterprise_identity((uint8*)username, strlen(username));
   wifi_station_set_enterprise_username((uint8*)username, strlen(username));
   wifi_station_set_enterprise_password((uint8*)password, strlen(password));
   wifi_station_connect();
@@ -36,11 +51,7 @@ void setup() {
     delay(1000);
     Serial.print(".");
   }
-
   Serial.println("WiFi connected");
   Serial.println("IP address: ");
   Serial.println(WiFi.localIP());
-}
-
-void loop() {
 }
