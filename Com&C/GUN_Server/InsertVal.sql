@@ -1,2 +1,3 @@
 USE GUN;
-INSERT INTO GUNHP (hp, boost, bullet, armor) VALUES (200, 0, 0, 0);
+INSERT INTO GUNHP (hp) VALUES (200);
+INSERT INTO Deal (deal, damage) VALUES (0, 0);
