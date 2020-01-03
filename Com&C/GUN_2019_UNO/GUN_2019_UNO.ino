@@ -12,7 +12,7 @@ MFRC522 mfrc522(SS_PIN, RST_PIN);   // Create MFRC522 instance.
 #define re 2000 //reload time(ms)
 #define ircode 5 //ir code (blit)
 #define SS 3 //소음기 총소리 파일번호
-#define SV 30 //소음기 소리 크기
+#define SV 20 //소음기 소리 크기
 #define RV 15 // 재장전 소리 크기
 IRsend irsend;
 SoftwareSerial mp3Serial(4, 5); // RX, TX
@@ -24,7 +24,7 @@ int RECV_PIN1 = A1;
 int Hp = 200;
 int gauge = 0;
 int killcode = 0;
-int set=1; // 0: 단발 1: 연사 2: 장전중
+int set=fset; // 0: 단발 1: 연사 2: 장전중
 int reloadPin=8;
 int firePin=7;
 int fire=1; //발사버튼누름
@@ -38,7 +38,7 @@ int i;
 long long int st2=0; // 재장전 시작시간
 long long int T;  // 현재 시간
 int firesound=1;
-int firevolume=30;
+int firevolume=SV;
 //13-9 8 7 6 3 핀 사용
 int helmet_level = 0;  //뚝배기 레벨
 int armor_level = 0;  // 갑옷 레벨
@@ -151,6 +151,7 @@ int arrrange[]={4,7,8,5,5,4,3,5,4,3,15,3,5};
 void sendInfo() {
   static long long last = 0;
   if(millis() - last < 1000) return;
+  Serial.println("Send");
   last = millis();
   data.write((byte)0);
   data.write((byte)ircode);
